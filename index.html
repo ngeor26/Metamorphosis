@@ -136,8 +136,37 @@
         <button id="skip-btn" style="font-size:1.2rem; padding:0.5rem 1rem;">Skip Animation</button>
         <button id="restart-btn" style="font-size:1.2rem; padding:0.5rem 1rem;">Restart Animation</button>
     </div>
+
+    <div id="start-overlay" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #1a1a1a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    ">
+        <button id="big-start-btn" style="
+            font-size: 4rem;
+            padding: 2rem 5rem;
+            border-radius: 10px;
+            cursor: pointer;
+        ">Start Experience</button>
+    </div>
     
     <script>
+        const startOverlay = document.getElementById('start-overlay');
+            const bigStartBtn = document.getElementById('big-start-btn');
+
+            bigStartBtn.addEventListener('click', () => {
+                startOverlay.style.display = 'none'; // hide overlay
+                elements.forEach(item => item.el.style.transform = `scale(${initialScale})`);
+                startAnimation();
+            });
+
         const audio = document.getElementById('bg-audio');
 
         const elements = [
