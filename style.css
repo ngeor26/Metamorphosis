@@ -1,5 +1,10 @@
 /* style.css */
 
+* {
+    font-family: inherit;
+    font-weight: 900;
+}
+
 body {
     font-family: Garamond, serif;
     background-color: #1a1a1a;
@@ -24,6 +29,7 @@ body {
 h1.title {
     font-size: 5rem;
     margin: 0 0 20px 0;
+    text-align: center;
 }
 
 /* Main layout */
