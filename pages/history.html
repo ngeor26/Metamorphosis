@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feminist Backdrop of The Metamorphosis</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+        #nemcova {
+            position: absolute;
+            width: 50vh;
+            height: 70vh;
+            border-radius: 10px;
+            right: 10%;
+            top: 20%;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,7 +36,7 @@
             </div>
             <div id="end-buttons">
                 <div id="buttons">
-                    <button onclick="window.location.href='theory.html'">Feminist Theory</button>
+                    <button onclick="goTOPage('theory.html?page=3')">Feminist Theory</button>
                 </div>
             </div>
         </div>
@@ -32,6 +44,8 @@
         <div id="popups">
         </div>
     </div>
+
+    <img id="nemcova" src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Bozena_Nemcova.jpg" alt="">
 
     <div id="progress-container">
         <div id="progress-bar"></div>
@@ -41,11 +55,30 @@
 
     <script>
         const pageEvents = [
-            
-        ];
+                { time: 13, id: "p12", text: "Gender roles were rigid and the patriarchy largely triumphed across households." },
+                { time: 20, id: "p13", text: "Austrian women did not receive the right to vote until 1918 (3 years after <i>The Metamorphosis</i> was published)." },
+                { time: 34, id: "p17", text: 'The Romantic Era saw the emergence of several prominent female writers, such as Bozena Nemcova, who challenged gender stereotypes though literature.' },
+                { time: 44, id: "p26", text: "The male-dominated household in The Metamorphosis is not a unique circumstance; instead, it mirrors the broader patriarchal structure of the era. " },
+            ];
     </script>
 
     <script src="../script.js"></script>
+    <script>
+        const video = document.querySelector("video");
+        video.addEventListener("timeupdate", () => {
+                const t = video.currentTime;
+                console.log(t)
+                if(t >= 37 && t < 39){
+                    document.querySelector("#nemcova").style.visibility = "visible";
+                    document.querySelector("#nemcova").style.opacity = "1"
+                    document.querySelector("#popups").style.visibility = "hidden";
+                } else {
+                    document.querySelector("#nemcova").style.visibility = "hidden";
+                    document.querySelector("#nemcova").style.opacity = "0"
+                    document.querySelector("#popups").style.visibility = "visible";
+                }
+            });
+    </script>
 
 </body>
 

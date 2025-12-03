@@ -6,6 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro to Feminist Theory</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+        main {
+            justify-content: center;
+        }
+        .video-mask-portrait {
+            border-radius: 12px;
+            overflow: hidden;
+            max-height: 80vh;   /* don't exceed viewport */
+            max-width: 30vw;    /* keep it narrow for portrait */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-mask-portrait video {
+            width: auto;       /* scale width automatically */
+            height: 65vh;      /* scale height automatically */
+            max-height: 100%;  /* don't exceed container height */
+            max-width: 100%;   /* don't exceed container width */
+            object-fit: contain; /* ensure no cropping */
+            display: block;
+        }
+
+        img {
+            border-radius: 20px;
+            width: 30vw;
+            height: 65vh;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,20 +45,27 @@
 
     <div id="main">
         <div id="video-column">
-            <div class="video-mask">
+            <div class="video-mask-portrait">
                 <video autoplay controls>
-                    <!-- <source src="../video/theory.mp4" type="video/mp4"> -->
+                    <source src="../video/theory.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div id="end-buttons">
                 <div id="buttons">
-                    <button onclick="window.location.href='history.html?page=2'">Feminist Historical Backdrop</button>
+                    Next:
+                    <button onclick="goToPage('history.html?page=3')">
+                        Feminist Historical Backdrop
+                    </button>
                 </div>
             </div>
         </div>
 
+                <img src="https://www.thoughtco.com/thmb/Njdy-0NCHeBZXI25ovBNf3glUQk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Woman-Puzzle-GettyImages-172436003-567166f25f9b586a9e1321f6.jpg"
+                    alt="">
+    
         <div id="popups">
+            <!-- Popups appear here -->
         </div>
     </div>
 
@@ -41,8 +77,11 @@
 
     <script>
         const pageEvents = [
-
-        ];
+                { time: 8, id: "p12", text: "Feminist theory aims to underscore the social, cultural, and political challenges women face" },
+                { time: 37, id: "p13", text: "Analyze how writings reflect, challenge, or reinforce patriarchy." },
+                { time: 44, id: "p17", text: 'This perspective examines how literature constructs gender roles, especially the ways in which power and authority are distributed between men and women.' },
+                { time: 59, id: "p26", text: "Questions whether moments of female empowerment actually challenge patriarchal structures or simply reflect them." },
+            ];
     </script>
 
     <script src="../script.js"></script>
