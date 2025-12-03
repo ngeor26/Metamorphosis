@@ -84,7 +84,7 @@
             color: white;
             border: none;
             padding: 1.2rem 3rem;
-            font-size: 3rem;
+            font-size: 2.5rem;
             border-radius: 8px;
             cursor: pointer;
         }
@@ -119,7 +119,7 @@
     </div>
 
     <div class="center-wrapper">
-        <button onclick="window.location.href='pages/intro.html?page=1'">Start Experience</button>
+        <button onclick="window.location.href='pages/intro.html?page=1'">Intro and Background</button>
     </div>
 
     <!-- Background audio -->
@@ -230,12 +230,13 @@
 
         // Skip Animation button
         document.getElementById('skip-btn').addEventListener('click', () => {
-            clearInterval(interval);
-            audio.pause()
-            elements.forEach(item => {
-                item.el.style.transform = `scale(${finalScale})`;
+                clearInterval(interval);
+                audio.currentTime = audio.duration; // jump to end
+                audio.pause();
+                elements.forEach(item => {
+                    item.el.style.transform = `scale(${finalScale})`;
+                });
             });
-        });
 
         // Restart Animation button
         document.getElementById('restart-btn').addEventListener('click', () => {
