@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to The Metamorphosis Feminist Lens</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title">Intro & Background</h1>
+    </div>
+
+    <div id="main">
+        <div id="video-column">
+            <div class="video-mask">
+                <video autoplay controls>
+                    <source src="../video/intro.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div id="end-buttons">
+                Choose your own adventure. Learn first about:
+                <div id="buttons">
+                    <button onclick="goToPage('history.html?page=2')">Feminist Historical Backdrop</button>
+                    <button onclick="goToPage('theory.html?page=2')">Feminist Theory</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="popups">
+        </div>
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const pageEvents = [
+            { time: 12, id: "p12", text: "Is the story feminist?" },
+            { time: 13, id: "p13", text: "Should we understand the story as female empowerment?" },
+            { time: 17, id: "p17", text: 'Could Grete "empower" herself without Gregor’s metamorphosis?' },
+            { time: 26, id: "p26", text: "Feminist liberation vs. concealed and reinforced patriarchy" },
+            { time: 32, id: "p38", text: "Thesis: While <i>The Metamorphosis</i> seems to promote ideas of feminist liberation, the underlying message reinforces a concealed patriarchy: one in which Grete continues to assume her subservient and obedient role to appease the family." }
+        ];
+    </script>
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>

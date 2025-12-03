@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Metamorphosis Critical Lenses Presentation</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #header {
+            text-align: center;
+            padding-top: 30px;
+            z-index: 2;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1.title {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+        }
+
+        h1.subtitle {
+            font-size: 2.2rem;
+            color: #d7b2ff;
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        .cover-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70vh;
+            top: 20%;
+            z-index: 1;
+            margin-inline: 20px;
+        }
+
+        .cover-left {
+            left: 10px;
+        }
+
+        .cover-right {
+            right: 10px;
+        }
+
+        .cover-left img,
+        .cover-right img {
+            height: 100%;
+            width: auto;
+            width: 30rem;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .center-wrapper {
+            transform: translate(-50%, -50%) scale(0.05);
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 35vh;
+        }
+
+        button {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 3rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        /* initial small scale for all elements */
+        #header,
+        .cover-left,
+        .cover-right,
+        .center-wrapper {
+            transform: scale(0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title"><i>The Metamorphosis</i> Critical Lenses Presentation</h1>
+        <h1 class="subtitle">From a Feminist Lens</h1>
+    </div>
+
+    <div class="cover-container cover-left">
+        <img src="https://images.booksense.com/images/303/611/9781537611303.jpg" alt="Book Cover">
+    </div>
+
+    <div class="cover-container cover-right">
+        <img src="https://miro.medium.com/1*D2jui3TfyqxLJymNMaJT0Q.jpeg" alt="Feminism image">
+    </div>
+
+    <div class="center-wrapper">
+        <button onclick="window.location.href='pages/intro.html?page=1'">Start Experience</button>
+    </div>
+
+    <!-- Background audio -->
+    <audio id="bg-audio" src="drama.mp3" autoplay></audio>
+
+    <div id="control-buttons" style="
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 5;
+    ">
+        <button id="skip-btn" style="font-size:1.2rem; padding:0.5rem 1rem;">Skip Animation</button>
+        <button id="restart-btn" style="font-size:1.2rem; padding:0.5rem 1rem;">Restart Animation</button>
+    </div>
+    
+    <script>
+        const audio = document.getElementById('bg-audio');
+
+        const elements = [
+            { el: document.getElementById('header') },
+            { el: document.querySelector('.cover-left') },
+            { el: document.querySelector('.cover-right') },
+            { el: document.querySelector('.center-wrapper') }
+        ];
+
+        // ===== Adjustable Parameters =====
+        const crescendoTime = 14.5; // seconds - when rapid zoom starts
+        const zoomDuration = 1; // seconds - duration of rapid zoom
+        const initialScale = 0.05; // starting scale
+        const preCrescendoScale = 0.3; // scale before rapid zoom
+        const finalScale = 1; // full scale at the end
+        const rapidEase = 2; // exponent for rapid zoom acceleration
+        // =================================
+
+        const zoomStartTime = crescendoTime;
+        const zoomEndTime = crescendoTime + zoomDuration;
+
+        let interval;
+
+        function startAnimation() {
+            // Reset audio to start
+            audio.currentTime = 0;
+            audio.play();
+
+            interval = setInterval(() => {
+                const t = audio.currentTime;
+
+                if (t < zoomStartTime) {
+                    // Slow linear zoom
+                    const progress = t / zoomStartTime; // 0 -> 1
+                    const scale = initialScale + (preCrescendoScale - initialScale) * progress;
+
+                    elements.forEach(item => {
+                        item.el.style.transform = `scale(${scale})`;
+                    });
+                } else if (t >= zoomStartTime && t < zoomEndTime) {
+                    // Rapid accelerating zoom
+                    const rapidProgress = (t - zoomStartTime) / zoomDuration; // 0 -> 1
+                    const easedRapid = Math.pow(rapidProgress, rapidEase);
+                    const scale = preCrescendoScale + (finalScale - preCrescendoScale) * easedRapid;
+
+                    elements.forEach(item => {
+                        item.el.style.transform = `scale(${scale})`;
+                    });
+                } else if (t >= zoomEndTime) {
+                    // Ensure final scale
+                    elements.forEach(item => {
+                        item.el.style.transform = `scale(${finalScale})`;
+                    });
+                    clearInterval(interval);
+                }
+            }, 5);
+        }
+
+        // Start animation on page load
+        startAnimation();
+
+        // Skip Animation button
+        document.getElementById('skip-btn').addEventListener('click', () => {
+            clearInterval(interval);
+            audio.pause()
+            elements.forEach(item => {
+                item.el.style.transform = `scale(${finalScale})`;
+            });
+        });
+
+        // Restart Animation button
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            clearInterval(interval);
+            elements.forEach(item => {
+                item.el.style.transform = `scale(${initialScale})`;
+            });
+            startAnimation();
+        });
+    </script>
+
+
+
+</body>
+
+</html>
