@@ -10,24 +10,27 @@
         main {
             justify-content: center;
         }
+        
         .video-mask-portrait {
             border-radius: 12px;
             overflow: hidden;
-            max-height: 80vh;   /* don't exceed viewport */
-            max-width: 30vw;    /* keep it narrow for portrait */
+            max-height: 80vh;
+            max-width: 30vw;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* FIX: enforce rounding directly on the <video> too */
         .video-mask-portrait video {
-            width: auto;       /* scale width automatically */
-            height: 65vh;      /* scale height automatically */
-            max-height: 100%;  /* don't exceed container height */
-            max-width: 100%;   /* don't exceed container width */
-            object-fit: contain; /* ensure no cropping */
+            border-radius: 12px;     /* NEW */
+            width: 100%;
+            height: auto;            /* prevent stretching / spilling */
+            max-height: 80vh;        /* NEW */
+            object-fit: cover;       /* ensures it fills while respecting the mask */
             display: block;
         }
+
 
         img {
             border-radius: 20px;
