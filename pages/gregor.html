@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feminist Analysis of Gregor</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .popup {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title">Feminist Analysis of Gregor</h1>
+    </div>
+
+    <div id="main">
+        <div id="video-column">
+            <div class="video-mask">
+                <video autoplay controls>
+                    <source src="../video/gregor.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div id="end-buttons">
+                Next:
+                <div id="buttons">
+                </div>
+            </div>
+        </div>
+
+        <div id="popups">
+        </div>
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const pageEvents = [
+            { time: 0, id: "p6", text: "Gregor represents Grete’s liberation from the patriarchy, as he provided the opportunity for her to join the conservatory to follow her dreams." },
+            { time: 11, id: "p12", text: "“It was his secret plan to send her off to study Conservatory next year (unlike Gregor, she dearly loved music and could play the violin quite movingly), despite the considerable costs this would no doubt entail” (22)." },
+            { time: 33, id: "p13", text: "Without Gregor's ability to earn money and the parents' refusal to work, Grete is deprived of her dream and held in her subservient role." },
+            { time: 43, id: "p26", text: "“Their parents did not like to hear it mentioned even in this innocuous way” (23)." },
+        ];
+    </script>
+    <script src="../script.js"></script>
+    <script>
+        // Get visited safely
+        const params = new URLSearchParams(window.location.search);
+        const page = parseInt(params.get("page"));
+        let visited;
+        try {
+            visited = JSON.parse(sessionStorage.getItem("visited")) || [];
+            if (!Array.isArray(visited)) visited = [];
+        } catch (e) {
+            visited = [];
+        }
+
+        visited.push("Gregor")
+
+        // Save back as proper JSON
+        sessionStorage.setItem("visited", JSON.stringify(visited));
+
+        const characters = ["Grete", "Mother", "Gregor", "Father"];
+
+        for (let character of characters) {
+            if (!visited.includes(character)) {
+                document.querySelector("#buttons").innerHTML += `
+            <button onclick="goToPage('${character.toLowerCase()}.html?page=${page + 1}')">${character}</button>
+        `;
+            }
+        }
+
+        if (document.querySelector("#buttons").innerHTML.trim() == "") {
+                document.querySelector("#buttons").innerHTML = `<button onclick="goToPage('conclusion.html?page=${page + 1}')">Conclusion</button>`
+            }
+    </script>
+
+</body>
+
+</html>

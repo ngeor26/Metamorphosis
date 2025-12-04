@@ -36,8 +36,19 @@
             </div>
             <div id="end-buttons">
                 <div id="buttons">
-                    Next:
-                    <button onclick="goTOPage('theory.html?page=3')">Feminist Theory</button>
+                    <div id="caseOne">
+                        Next:
+                        <button onclick="goToPage('theory.html?page=3')">Feminist Theory</button>
+                    </div>
+                    <div id="caseTwo" style="display: flex; flex-direction: column; justify-content: center;">
+                        Learn more about characters analyzed through a feminist lens:
+                        <div style="margin-top: 10px;">
+                            <button onclick="goToPage('grete.html?page=4')">Grete</button>
+                            <button onclick="goToPage('mother.html?page=4')">Mother</button>
+                            <button onclick="goToPage('gregor.html?page=4')">Gregor</button>
+                            <button onclick="goToPage('father.html?page=4')">Father</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,7 +73,15 @@
                 { time: 44, id: "p26", text: "The male-dominated household in The Metamorphosis is not a unique circumstance; instead, it mirrors the broader patriarchal structure of the era. " },
             ];
     </script>
-
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const page = params.get("page")
+        if (page == "3") {
+            document.querySelector("#caseOne").style.display = "none"
+        } else {
+            document.querySelector("#caseTwo").style.display = "none"
+        }
+    </script>
     <script src="../script.js"></script>
     <script>
         const video = document.querySelector("video");
@@ -80,7 +99,6 @@
                 }
             });
     </script>
-
 </body>
 
 </html>

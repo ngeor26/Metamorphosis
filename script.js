@@ -10,7 +10,7 @@ function goToPage(url) {
 document.addEventListener("DOMContentLoaded", () => {
     const video = document.querySelector("video");
 
-    bgaudio.volume = 0.1;
+    bgaudio.volume = 0;
     const params = new URLSearchParams(window.location.search);
     const bgTime = params.get("bgTime");
 

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusion</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            gap: 2vw;
+            /* spacing between video and image */
+            margin-top: 2vh;
+        }
+
+        /* Video container */
+        .video-mask-portrait {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 65vh;
+            /* fixed height */
+            width: auto;
+            /* width adjusts to maintain aspect ratio */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Video itself */
+        .video-mask-portrait video {
+            border-radius: 12px;
+            height: 100%;
+            /* fill container height */
+            width: auto;
+            /* scale width to maintain aspect ratio */
+            object-fit: contain;
+            /* prevent cropping/stretching */
+            display: block;
+        }
+
+        /* Image styling */
+        img {
+            border-radius: 12px;
+            height: 65vh;
+            /* same as video */
+            width: 30vw;
+            /* scale width automatically */
+            flex-shrink: 0;
+        }
+
+        /* Buttons container */
+        #caseTwo {
+            width: 100vw;
+            position: relative;
+            left: calc(-50vw + 150%);
+            margin-right: -100vw;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title">Conclusion</h1>
+    </div>
+
+    <div id="main">
+        <div id="video-column">
+            <div class="video-mask-portrait">
+                <video autoplay controls>
+                    <source src="../video/theory.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div id="end-buttons">
+                <div id="buttons">
+                    <div id="caseOne">
+                        Next:
+                        <button onclick="goToPage('history.html?page=3')">Feminist Historical Backdrop</button>
+                    </div>
+                    <div id="caseTwo">
+                        Learn more about characters analyzed through a feminist lens:
+                        <div style="margin: 10px; flex-wrap: nowrap;">
+                            <button onclick="goToPage('grete.html?page=4')">Grete</button>
+                            <button onclick="goToPage('mother.html?page=4')">Mother</button>
+                            <button onclick="goToPage('gregor.html?page=4')">Gregor</button>
+                            <button onclick="goToPage('father.html?page=4')">Father</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <img src="https://www.thoughtco.com/thmb/Njdy-0NCHeBZXI25ovBNf3glUQk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Woman-Puzzle-GettyImages-172436003-567166f25f9b586a9e1321f6.jpg"
+            alt="">
+
+        <div id="popups">
+            <!-- Popups appear here -->
+        </div>
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const pageEvents = [
+            { time: 8, id: "p12", text: "Feminist theory aims to underscore the social, cultural, and political challenges women face" },
+            { time: 37, id: "p13", text: "Analyze how writings reflect, challenge, or reinforce patriarchy." },
+            { time: 44, id: "p17", text: 'This perspective examines how literature constructs gender roles, especially the ways in which power and authority are distributed between men and women.' },
+            { time: 59, id: "p26", text: "Questions whether moments of female empowerment actually challenge patriarchal structures or simply reflect them." },
+        ];
+    </script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const page = params.get("page")
+        if (page == "3") {
+            document.querySelector("#caseOne").style.display = "none"
+        } else {
+            document.querySelector("#caseTwo").style.display = "none"
+        }
+    </script>
+    <script src="../script.js"></script>
+
+</body>
+
+</html>

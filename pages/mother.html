@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feminist Analysis of the Mother</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .popup{
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title">Feminist Analysis of the Mother</h1>
+    </div>
+
+    <div id="main">
+        <div id="video-column">
+            <div class="video-mask">
+                <video autoplay controls>
+                    <source src="../video/mother.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div id="end-buttons">
+                Next:
+                <div id="buttons">
+                </div>
+            </div>
+        </div>
+
+        <div id="popups">
+        </div>
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const pageEvents = [
+            { time: 4, id: "p12", text: "The mother never truly steps outside of her submissive role." },
+            { time: 21, id: "p17", text: "The mother's sewing serves as a reminder of the patriarchy." },
+            { time: 35, id: "p13", text: "“Later, though, she had to be held back by force, and when she then cried out: ‘Let me go to Gregor, he is my unhappy son! Can’t you understand that I must go to him?’ then Gregor thought it would perhaps be good for his mother to visit him, not every day of course, but perhaps once a week; after all, she had a far better grasp of things than his sister, who despite her courage was still a child and, when it came right down to it, had perhaps only taken on this difficult task out of childish frivolity” (25)." },
+            { time: 63, id: "p26", text: "Her compassion as a mother is invisibly controlled by patriarchal expectations." },
+        ];
+    </script>
+    <script src="../script.js"></script>
+    <script>
+        // Get visited safely
+        const params = new URLSearchParams(window.location.search);
+            const page = parseInt(params.get("page"));
+            let visited;
+            try {
+                visited = JSON.parse(sessionStorage.getItem("visited")) || [];
+                if (!Array.isArray(visited)) visited = [];
+            } catch (e) {
+                visited = [];
+            }
+
+            visited.push("Mother");
+
+            // Save back as proper JSON
+            sessionStorage.setItem("visited", JSON.stringify(visited));
+
+            const characters = ["Grete", "Mother", "Gregor", "Father"];
+
+            for (let character of characters) {
+                if (!visited.includes(character)) {
+                    document.querySelector("#buttons").innerHTML += `
+            <button onclick="goToPage('${character.toLowerCase()}.html?page=${page + 1}')">${character}</button>
+        `;
+                }
+            }
+
+            if (document.querySelector("#buttons").innerHTML.trim() == "") {
+                    document.querySelector("#buttons").innerHTML = `<button onclick="goToPage('conclusion.html?page=${page + 1}')">Conclusion</button>`
+                }
+    </script>
+
+</body>
+
+</html>

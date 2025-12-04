@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feminist Analysis of Grete</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .popup {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="header">
+        <h1 class="title">Feminist Analysis of Grete</h1>
+    </div>
+
+    <div id="main">
+        <div id="video-column">
+            <div class="video-mask">
+                <video autoplay controls>
+                    <source src="../video/grete.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div id="end-buttons">
+                Next:
+                <div id="buttons">
+                </div>
+            </div>
+        </div>
+
+        <div id="popups">
+        </div>
+    </div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const pageEvents = [
+            { time: 8, id: "p6", text: "It initially seems like Grete assumes a patriarchal role, providing for Gregor and the family as a saleswoman." },
+            { time: 30, id: "p12", text: "“We can't carry on like this. Maybe you can't see it, but I can. I don't want to call this monster my brother, all I can say is: we have to try and get rid of it” (41)." },
+            { time: 68, id: "p13", text: "“She had recently blossomed into a beautiful, voluptuous girl. Growing quieter now and communicating with one another almost unconsciously by an exchange of glances, they thought about how it would soon be time to find her a good husband” (47)." },
+            { time: 94, id: "p26", text: "Being married off perpatuates a lack of freedom, working against the feminist argument." },
+        ];
+    </script>
+    <script src="../script.js"></script>
+    <script>
+        // Get visited safely
+        const params = new URLSearchParams(window.location.search);
+            const page = parseInt(params.get("page"));
+            let visited;
+            try {
+                visited = JSON.parse(sessionStorage.getItem("visited")) || [];
+                if (!Array.isArray(visited)) visited = [];
+            } catch (e) {
+                visited = [];
+            }
+
+            visited.push("Grete")
+
+            // Save back as proper JSON
+            sessionStorage.setItem("visited", JSON.stringify(visited));
+
+            const characters = ["Grete", "Mother", "Gregor", "Father"];
+
+            for (let character of characters) {
+                if (!visited.includes(character)) {
+                    document.querySelector("#buttons").innerHTML += `
+            <button onclick="goToPage('${character.toLowerCase()}.html?page=${page + 1}')">${character}</button>
+        `;
+                }
+            }
+
+            if (document.querySelector("#buttons").innerHTML.trim() == "") {
+                    document.querySelector("#buttons").innerHTML = `<button onclick="goToPage('conclusion.html?page=${page + 1}')">Conclusion</button>`
+                }
+    </script>
+
+</body>
+
+</html>

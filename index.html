@@ -127,7 +127,7 @@
     </div>
 
     <!-- Background audio -->
-    <audio id="bg-audio" src="drama.mp3"></audio>
+    <audio id="bg-audio" src="drama2.mp3"></audio>
 
     <div id="control-buttons" style="
         position: absolute;
@@ -181,7 +181,7 @@
         ];
 
         // ===== Adjustable Parameters =====
-        const crescendoTime = 14.5; // seconds - when rapid zoom starts
+        const crescendoTime = 9; // seconds - when rapid zoom starts
         const zoomDuration = 1; // seconds - duration of rapid zoom
         const initialScale = 0.05; // starting scale
         const preCrescendoScale = 0.3; // scale before rapid zoom
@@ -228,9 +228,6 @@
                 }
             }, 5);
         }
-
-        // Start animation on page load
-        startAnimation();
 
         // Skip Animation button
         document.getElementById('skip-btn').addEventListener('click', () => {
