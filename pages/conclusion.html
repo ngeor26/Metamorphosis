@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,6 +60,18 @@
             flex-direction: row;
             align-items: center;
         }
+
+        #cited {
+            background-color: #d7b2ff;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+        }
     </style>
 </head>
 
@@ -74,31 +85,11 @@
         <div id="video-column">
             <div class="video-mask-portrait">
                 <video autoplay controls>
-                    <source src="../video/theory.mp4" type="video/mp4">
+                    <source src="../video/conclusion.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div id="end-buttons">
-                <div id="buttons">
-                    <div id="caseOne">
-                        Next:
-                        <button onclick="goToPage('history.html?page=3')">Feminist Historical Backdrop</button>
-                    </div>
-                    <div id="caseTwo">
-                        Learn more about characters analyzed through a feminist lens:
-                        <div style="margin: 10px; flex-wrap: nowrap;">
-                            <button onclick="goToPage('grete.html?page=4')">Grete</button>
-                            <button onclick="goToPage('mother.html?page=4')">Mother</button>
-                            <button onclick="goToPage('gregor.html?page=4')">Gregor</button>
-                            <button onclick="goToPage('father.html?page=4')">Father</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-
-        <img src="https://www.thoughtco.com/thmb/Njdy-0NCHeBZXI25ovBNf3glUQk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Woman-Puzzle-GettyImages-172436003-567166f25f9b586a9e1321f6.jpg"
-            alt="">
 
         <div id="popups">
             <!-- Popups appear here -->
@@ -111,12 +102,13 @@
 
     <audio id="bg" src="../bg.mp3"></audio>
 
+    <button style="position: absolute; bottom: 5%; right: 3%" id="cited" onclick="window.location.href='cited.html'">Works Cited</button>
+
     <script>
         const pageEvents = [
-            { time: 8, id: "p12", text: "Feminist theory aims to underscore the social, cultural, and political challenges women face" },
-            { time: 37, id: "p13", text: "Analyze how writings reflect, challenge, or reinforce patriarchy." },
-            { time: 44, id: "p17", text: 'This perspective examines how literature constructs gender roles, especially the ways in which power and authority are distributed between men and women.' },
-            { time: 59, id: "p26", text: "Questions whether moments of female empowerment actually challenge patriarchal structures or simply reflect them." },
+            { time: 5, id: "p12", text: "Not only is using a feminist critical lens important for interpreting literature, but it’s also useful for recognizing the structures that shape our lives today." },
+            { time: 22, id: "p13", text: "By analyzing Grete’s shifting responsibilities in the family and their treatment of her, we can see how easily labor can be taken for granted and how patriarchal norms reassert themselves, even when empowerment appears to be present." },
+            { time: 44, id: "p17", text: 'In learning to identify patterns of inequality and gender expectations in literature, we also learn to identify them in the world around us.' },
         ];
     </script>
     <script>

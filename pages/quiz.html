@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Quiz</title>
+    <style>
+        /* Base body styling */
+        body {
+            font-family: Garamond, serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 80vw;
+            height: 85vh;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .timer {
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .quiz-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .question {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 20vw;
+            flex: 1;
+            min-width: 180px;
+            font-size: 1rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            background-color: #d7b2ff;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: center;
+            transition: background-color 0.3s;
+        }
+
+        #submit-btn:hover {
+            background-color: #b08ce0;
+        }
+
+        #result {
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 700px) {
+            .quiz-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .question {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>POP QUIZ!!!!!</h1>
+    <div id="quiz-container">
+        <div class="timer" id="timer">Time Left: 30s</div>
+
+        <!-- First row: 3 questions -->
+        <div class="quiz-row">
+            <div class="question">
+                1. We argued that Grete’s empowerment in the novella is ultimately...
+                <div class="options">
+                    <label><input type="radio" name="q1" value="A">A permanent shift that frees her from the family</label>
+                    <label><input type="radio" name="q1" value="B">An illusion that collapses once patriarchal authority returns</label>
+                    <label><input type="radio" name="q1" value="C">Evidence that Kafka supports feminist ideals</label>
+                    <label><input type="radio" name="q1" value="D">Stronger than Gregor’s former authority</label>
+                </div>
+            </div>
+
+            <div class="question">
+                2. In our analysis, what did Gregor’s earlier plan to send Grete to the conservatory reveal about gender expectations?
+                <div class="options">
+                    <label><input type="radio" name="q2" value="A">Grete was always expected to become the family provider</label>
+                    <label><input type="radio" name="q2" value="B">Even her dreams depended entirely on Gregor’s ability to earn money</label>
+                    <label><input type="radio" name="q2" value="C">Grete had more authority than the father</label>
+                    <label><input type="radio" name="q2" value="D">The conservatory represented rebellion against the family</label>
+                </div>
+            </div>
+
+            <div class="question">
+                3. Why did we argue that Grete taking on work is not true female empowerment?
+                <div class="options">
+                    <label><input type="radio" name="q3" value="A">She earns more money than Gregor ever did</label>
+                    <label><input type="radio" name="q3" value="B">The mother and father refuse to work</label>
+                    <label><input type="radio" name="q3" value="C">She begins working only to replace Grego </label>
+                    <label><input type="radio" name="q3" value="D">She wanted economic power to control the household</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second row: 2 questions -->
+        <div class="quiz-row">
+            <div class="question">
+                4. Which of the following is <i>not</i> one of the reasons we cited for the mother not escaping the patriarchy?
+                <div class="options">
+                    <label><input type="radio" name="q4" value="A">She continues to care for or worry about Gregor</label>
+                    <label><input type="radio" name="q4" value="B">She is confined to domestic labor like sewing and housekeeping</label>
+                    <label><input type="radio" name="q4" value="C">She believes maintaining family harmony is more important than questioning gender roles</label>
+                    <label><input type="radio" name="q4" value="D">She maintains a passive demeanor</label>
+                </div>
+            </div>
+
+            <div class="question">
+                5. Why do the parents decide Grete is ready for marriage?
+                <div class="options">
+                    <label><input type="radio" name="q5" value="A">She expresses a desire to leave</label>
+                    <label><input type="radio" name="q5" value="B">He sees her body as “voluptuous,” reducing her to physical maturity rather than personal growth</label>
+                    <label><input type="radio" name="q5" value="C">She proves herself financially capable</label>
+                    <label><input type="radio" name="q5" value="D">She receives a promotion at work</label>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <audio id="bg" src="../bg.mp3"></audio>
+
+    <script>
+        const bgaudio = document.querySelector("#bg");
+
+        bgaudio.volume = 0.05;
+        const params = new URLSearchParams(window.location.search);
+        const bgTime = params.get("bgTime");
+
+        if (bgTime) {
+            bgaudio.currentTime = parseFloat(bgTime);
+        }
+
+        bgaudio.play();
+
+        function goToPage(url) {
+            // Pass the current audio time as URL param
+            const currentTime = bgaudio.currentTime.toFixed(2);
+            const separator = url.includes("?") ? "&" : "?";
+            window.location.href = `${url}${separator}bgTime=${currentTime}`;
+        }
+    </script>
+
+    <script>
+        // Set your correct answers here
+        const correctAnswers = {
+            q1: "B",
+            q2: "B",
+            q3: "C",
+            q4: "C",
+            q5: "B"
+        };
+
+        // Timer logic
+        const timerEl = document.getElementById("timer");
+        let timeLeft = 30;
+        const timer = setInterval(() => {
+            timeLeft--;
+            timerEl.textContent = `Time Left: ${timeLeft}s`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                calculateScore();
+            }
+        }, 1000);
+
+        // Submit button
+        document.querySelector(".btn").addEventListener("click", () => {
+            clearInterval(timer);
+            calculateScore();
+        });
+
+        function calculateScore() {
+            let score = 0;
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.value === correctAnswers[q]) {
+                    score++;
+                }
+            }
+            document.getElementById("timer").innerHTML = `You scored ${score}/5`;
+            if(score==5){
+                document.getElementById("timer").innerHTML += ". GOOD :)"
+            }
+
+            document.getElementById("timer").innerHTML += `<button class="btn" style="margin-left: 20px" onclick="goToPage('conclusion.html?page=8')">Go to Conclusion</button>`
+            document.querySelectorAll("input[type=radio]").forEach(radio => radio.disabled = true);
+        }
+    </script>
+
+</body>
+
+</html>
